@@ -25,18 +25,11 @@ class MainActivity: AppCompatActivity() {
             Produto(nome = "Test 2",
                 descricao = "test desc 2 ",
                 value = BigDecimal("500.00")),
-            Produto(nome = "Test 3",
-                descricao = "test desc",
-                value = BigDecimal("1202.00"))
+            Produto(nome = "Teste 33",
+                descricao = "desc desc",
+                value = BigDecimal("120.00"))
         ))
 //        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
 }
-
-//        val name = findViewById<TextView>(R.id.name)
-//        name.text = ("cesta de fruta")
-//        val description = findViewById<TextView>(R.id.description)
-//        description.text = ("Laranja, Manga e Uva")
-//        val value = findViewById<TextView>(R.id.value)
-//        value.text = ("R$ 19,99")
