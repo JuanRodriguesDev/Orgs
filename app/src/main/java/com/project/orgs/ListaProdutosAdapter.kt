@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ListaProdutosAdapter(
     private val context: Context,
-    private val produtos: List<Produto>
+    produtos: List<Produto>
 ) : RecyclerView.Adapter<ListaProdutosAdapter.ViewHolder>() {
+
+    private val produtos = produtos.toMutableList()
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -27,13 +29,19 @@ class ListaProdutosAdapter(
 
     override fun getItemCount(): Int = produtos.size
 
+    fun atualiza(produtos: List<Produto>) {
+        this.produtos.clear()
+        this.produtos.addAll(produtos)
+        notifyDataSetChanged()
+    }
+
 }
 
 private fun RecyclerView.ViewHolder.vincula(produto: Produto) {
-    val name = itemView.findViewById<TextView>(R.id.name)
+    val name = itemView.findViewById<TextView>(R.id.product_item_name)
     name.text = produto.nome
-    val description = itemView.findViewById<TextView>(R.id.descricao)
+    val description = itemView.findViewById<TextView>(R.id.product_item_descricao)
     description.text = produto.descricao
-    val value = itemView.findViewById<TextView>(R.id.value)
+    val value = itemView.findViewById<TextView>(R.id.product_item_value)
     value.text = produto.value.toPlainString()
 }

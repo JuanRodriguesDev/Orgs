@@ -13,7 +13,7 @@ android:layout_height="wrap_content"
 tools:context=".ui.activity.FormsActivity">
 
 <EditText
-    android:id="@+id/nome"
+    android:id="@+id/acitivity_forms_name"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:hint="Nome"
@@ -24,27 +24,27 @@ tools:context=".ui.activity.FormsActivity">
     app:layout_constraintTop_toTopOf="parent"/>
 
 <EditText
-    android:id="@+id/descricao"
+    android:id="@+id/acitivity_forms_description"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:hint="Descrição"
     android:inputType="text"
-    app:layout_constraintEnd_toEndOf="@id/nome"
-    app:layout_constraintStart_toStartOf="@id/nome"
-    app:layout_constraintTop_toBottomOf="@id/nome"/>
+    app:layout_constraintEnd_toEndOf="@id/acitivity_forms_name"
+    app:layout_constraintStart_toStartOf="@id/acitivity_forms_name"
+    app:layout_constraintTop_toBottomOf="@id/acitivity_forms_name"/>
 
 <EditText
-    android:id="@+id/value"
+    android:id="@+id/acitivity_forms_value"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:hint="Valor"
     android:inputType="numberDecimal"
-    app:layout_constraintEnd_toEndOf="@id/descricao"
-    app:layout_constraintStart_toStartOf="@id/descricao"
-    app:layout_constraintTop_toBottomOf="@id/descricao"/>
+    app:layout_constraintEnd_toEndOf="@id/acitivity_forms_description"
+    app:layout_constraintStart_toStartOf="@id/acitivity_forms_description"
+    app:layout_constraintTop_toBottomOf="@id/acitivity_forms_description"/>
 
 <Button
-    android:id="@+id/btnSave"
+    android:id="@+id/acitivity_forms_btnSave"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
@@ -53,7 +53,7 @@ tools:context=".ui.activity.FormsActivity">
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/value"/>
+    app:layout_constraintTop_toBottomOf="@+id/acitivity_forms_value"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
