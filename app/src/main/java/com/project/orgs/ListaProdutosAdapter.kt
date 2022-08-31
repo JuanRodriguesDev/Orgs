@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.NumberFormat
+import java.util.*
 
 class ListaProdutosAdapter(
     private val context: Context,
@@ -43,5 +45,12 @@ private fun RecyclerView.ViewHolder.vincula(produto: Produto) {
     val description = itemView.findViewById<TextView>(R.id.product_item_descricao)
     description.text = produto.descricao
     val value = itemView.findViewById<TextView>(R.id.product_item_value)
-    value.text = produto.value.toPlainString()
+    val formatador: NumberFormat = formatBRL()
+    val valorEmMoeda: String = formatador.format(produto.value)
+    value.text = valorEmMoeda
+}
+
+private fun formatBRL(): NumberFormat {
+    val formatador: NumberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
+    return formatador
 }
