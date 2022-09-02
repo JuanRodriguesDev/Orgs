@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.math.BigDecimal
 import java.text.NumberFormat
 import java.util.*
 
@@ -16,15 +17,16 @@ class ListaProdutosAdapter(
 
     private val produtos = produtos.toMutableList()
 
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-      val inflater = LayoutInflater.from(context)
+        val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.product_item, parent, false)
+
         return ViewHolder(view)
     }
 
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val produto = produtos[position]
         holder.vincula(produto)
     }
@@ -37,20 +39,21 @@ class ListaProdutosAdapter(
         notifyDataSetChanged()
     }
 
-}
 
-private fun RecyclerView.ViewHolder.vincula(produto: Produto) {
-    val name = itemView.findViewById<TextView>(R.id.product_item_name)
-    name.text = produto.nome
-    val description = itemView.findViewById<TextView>(R.id.product_item_descricao)
-    description.text = produto.descricao
-    val value = itemView.findViewById<TextView>(R.id.product_item_value)
-    val formatador: NumberFormat = formatBRL()
-    val valorEmMoeda: String = formatador.format(produto.value)
-    value.text = valorEmMoeda
-}
 
-private fun formatBRL(): NumberFormat {
-    val formatador: NumberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
-    return formatador
+    private fun RecyclerView.ViewHolder.vincula(produto: Produto) {
+        val name = itemView.findViewById<TextView>(R.id.product_item_name)
+        name.text = produto.nome
+        val description = itemView.findViewById<TextView>(R.id.product_item_descricao)
+        description.text = produto.descricao
+        val value = itemView.findViewById<TextView>(R.id.product_item_value)
+        val formatador: NumberFormat = formatBRL()
+        val valorEmMoeda: String = formatador.format(produto.value)
+        value.text = valorEmMoeda
+    }
+
+    private fun formatBRL(): NumberFormat {
+        val formatador: NumberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
+        return formatador
+    }
 }

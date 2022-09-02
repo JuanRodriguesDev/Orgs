@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import com.project.orgs.Produto
 import com.project.orgs.R
 import com.project.orgs.dao.ProdutosDao
@@ -15,8 +17,8 @@ class FormsActivity : AppCompatActivity(R.layout.activity_forms) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         configBtnSaveData()
+        alertAction()
     }
 
     private fun configBtnSaveData() {
@@ -51,5 +53,14 @@ class FormsActivity : AppCompatActivity(R.layout.activity_forms) {
             value = value
         )
     }
+    private fun alertAction() {
+        AlertDialog.Builder(this)
+            .setView(R.layout.forms_image)
+            .setPositiveButton("Confirmar") { _, _ ->  }
+
+            .setNegativeButton("Cancelar"){ _, _ ->  }
+            .show()
+    }
+
 }
 
