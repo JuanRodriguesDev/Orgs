@@ -12,6 +12,8 @@ import com.project.orgs.R
 import com.project.orgs.dao.ProdutosDao
 import com.project.orgs.databinding.ActivityFormsBinding
 import com.project.orgs.databinding.FormsImageBinding
+import com.project.orgs.extensions.tryLoadImage
+import com.project.orgs.ui.activity.dialog.FormsImageDialog
 import java.math.BigDecimal
 
 
@@ -24,23 +26,15 @@ class FormsActivity : AppCompatActivity(R.layout.activity_forms) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = "Cadastrar Produto"
         setContentView(binding.root)
         configBtnSaveData()
-
         binding.activityFormsImage.setOnClickListener {
-            val bindingFormsImage = FormsImageBinding.inflate(layoutInflater)
-            bindingFormsImage.btnRefresh.setOnClickListener {
-                val url = bindingFormsImage.formsImageUrl.text.toString()
-                bindingFormsImage.formsImage.load(url)
-            }
-            AlertDialog.Builder(this)
-                .setView(bindingFormsImage.root)
-                .setPositiveButton("Confirmar") { _, _ ->
-                   url = bindingFormsImage.formsImageUrl.text.toString()
-                    binding.activityFormsImage.load(url)
+            FormsImageDialog(this)
+                .show {imagem ->
+                   url = imagem
+                   binding.activityFormsImage.tryLoadImage(url)
                 }
-                .setNegativeButton("Cancelar"){ _, _ ->  }
-                .show()
         }
     }
 

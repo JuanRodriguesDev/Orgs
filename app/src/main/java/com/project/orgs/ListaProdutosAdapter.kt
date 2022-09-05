@@ -11,6 +11,7 @@ import coil.load
 import java.lang.System.load
 import java.text.NumberFormat
 import com.project.orgs.databinding.ProductItemBinding
+import com.project.orgs.extensions.tryLoadImage
 import java.util.*
 
 class ListaProdutosAdapter(
@@ -31,10 +32,9 @@ class ListaProdutosAdapter(
             val formatador: NumberFormat = formatBRL()
             val valorEmMoeda: String = formatador.format(produto.value)
             value.text = valorEmMoeda
-            binding.imageView.load(produto.image) {
-                fallback(R.drawable.img_1)
-                error(R.drawable.img_1)
-            }
+            binding.imageView.tryLoadImage(produto.image)
+
+
         }
         private fun formatBRL(): NumberFormat {
             val formatador: NumberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
