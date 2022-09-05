@@ -6,23 +6,46 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import coil.load
 import com.project.orgs.Produto
 import com.project.orgs.R
 import com.project.orgs.dao.ProdutosDao
+import com.project.orgs.databinding.ActivityFormsBinding
+import com.project.orgs.databinding.FormsImageBinding
 import java.math.BigDecimal
 
 
 class FormsActivity : AppCompatActivity(R.layout.activity_forms) {
 
+    private val binding by lazy {
+        ActivityFormsBinding.inflate(layoutInflater)
+    }
+    private var url: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
         configBtnSaveData()
-        alertAction()
+
+        binding.activityFormsImage.setOnClickListener {
+            val bindingFormsImage = FormsImageBinding.inflate(layoutInflater)
+            bindingFormsImage.btnRefresh.setOnClickListener {
+                val url = bindingFormsImage.formsImageUrl.text.toString()
+                bindingFormsImage.formsImage.load(url)
+            }
+            AlertDialog.Builder(this)
+                .setView(bindingFormsImage.root)
+                .setPositiveButton("Confirmar") { _, _ ->
+                   url = bindingFormsImage.formsImageUrl.text.toString()
+                    binding.activityFormsImage.load(url)
+                }
+                .setNegativeButton("Cancelar"){ _, _ ->  }
+                .show()
+        }
     }
 
     private fun configBtnSaveData() {
-        val btnSave = findViewById<Button>(R.id.acitivity_forms_btnSave)
+        val btnSave = binding.acitivityFormsBtnSave
         val dao = ProdutosDao()
         btnSave.setOnClickListener {
             val newProduct = createProduct()
@@ -32,13 +55,13 @@ class FormsActivity : AppCompatActivity(R.layout.activity_forms) {
     }
 
     private fun createProduct(): Produto {
-        val campoNome = findViewById<EditText>(R.id.acitivity_forms_name)
+        val campoNome = binding.acitivityFormsName
         val nome = campoNome.text.toString()
 
-        val campoDescricao = findViewById<EditText>(R.id.acitivity_forms_description)
+        val campoDescricao = binding.acitivityFormsDescription
         val descricao = campoDescricao.text.toString()
 
-        val campoValue = findViewById<EditText>(R.id.acitivity_forms_value)
+        val campoValue = binding.acitivityFormsValue
         val textValue = campoValue.text.toString()
 
         val value = if (textValue.isBlank()) {
@@ -50,17 +73,9 @@ class FormsActivity : AppCompatActivity(R.layout.activity_forms) {
         return Produto(
             nome = nome,
             descricao = descricao,
-            value = value
+            value = value,
+            image = url
         )
     }
-    private fun alertAction() {
-        AlertDialog.Builder(this)
-            .setView(R.layout.forms_image)
-            .setPositiveButton("Confirmar") { _, _ ->  }
-
-            .setNegativeButton("Cancelar"){ _, _ ->  }
-            .show()
-    }
-
 }
 
